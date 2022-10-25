@@ -1,0 +1,50 @@
+html,body,header,footer,p{
+	padding:0;
+	margin: 0;
+}
+.container{
+	max-width: 1280px;
+	margin: 0 auto;
+}
+.header {
+	position: relative;
+	display: flex;
+	height: 147px;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	background: rgba(222, 222, 222, 0.5);
+	backdrop-filter: blur(10px)
+}
+.logo1{
+	position: absolute;
+	width: 147px;
+	height: 147px;
+	left: 291px;
+}
+.logo2 {
+	position: absolute;
+	width: 121px;
+	height: 42px;
+	left: 374px;
+	top: 92px;
+	color: ;
+}
+.navigation {
+	width: 100%;
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	color: #1F1E1E;
+	margin-top: 61px;
+}
+.navigation div {
+	align-items: center;
+	text-align: center;
+	margin: 0 25px 0 25px;
+	line-height: 25px;
+}
+.name{
+	margin-top: 100px;
+	text-align: center;
+}
