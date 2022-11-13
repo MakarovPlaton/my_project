@@ -1,0 +1,33 @@
+.event_reserve {
+	display: grid;
+	width: 100%;
+	gap: 67px 150px;
+	grid-template-columns: 405px calc(89% - 405px);
+	grid-template-areas:
+		"checkbox scheme"
+		"order legend";
+
+	&_checkbox {
+		grid-area: checkbox;
+		background-color: #bc3324;
+		height: 100px;
+	}
+
+	&_scheme {
+		grid-area: scheme;
+		background-color: #24bc38;
+		height: 100px;
+	}
+
+	&_order {
+		grid-area: order;
+		background-color: #4524bc;
+		height: 100px;
+	}
+
+	&_legend {
+		grid-area: legend;
+		background-color: #e3c507;
+		height: 100px;
+	}
+}
