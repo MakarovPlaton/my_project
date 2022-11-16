@@ -1,29 +1,37 @@
 import gulp from "gulp";
 import del from "del";
+
+import include from "gulp-file-include";
+import formatHtml from "gulp-format-html";
+
+import less from "gulp-less";
+import plumber from "gulp-plumber";
 import postcss from "gulp-postcss";
 import autoprefixer from "autoprefixer";
-import include from "gulp-file-include";
-import plumber from "gulp-plumber";
-import formatHtml from "gulp-format-html";
 import sortMediaQueries from "postcss-sort-media-queries";
-import less from "gulp-less";
 import minify from "gulp-csso";
 import rename from "gulp-rename";
+
 import terser from "gulp-terser";
+
 import imagemin from "gulp-imagemin";
 import imagemin_gifsicle from "imagemin-gifsicle";
 import imagemin_mozjpeg from "imagemin-mozjpeg";
 import imagemin_optipng from "imagemin-optipng";
+
 import svgmin from "gulp-svgmin";
 import svgstore from "gulp-svgstore";
+
 import server from "browser-sync";
 
 
 const resources = {
-	html: "src/html/**/**/**.html",
-	less: "src/styles/**.*.less",
-	jsDev: "src/scripts/dev/**.*.js",
+	html: "src/html/**/*.html",
+	jsDev: "src/scripts/dev/**/*.js",
 	jsVendor: "src/scripts/vendor/**/*.js",
+	images: "src/assets/images/**/*.{png. jpg. jpeg. webp, gif, svg}",
+	less: "src/styles/**/*.less",
+	svgSprite: "src/assets/svg-sprite/*.svg",
 	static: [
 		"src/assets/icons/**/*.*",
 		"src/assets/favicons/**/*.*",
@@ -32,10 +40,8 @@ const resources = {
 		"src/assets/audio/**/*.{mp3,ogg,wav,aac}",
 		"src/json/**/*.json",
 		"src/php/**/*.php"
-	],
-	images: "src/assets/images/**/*.{png. jpg. jpeg. webp, gif, svg}",
-	svgSprite: "src/assets/svg-sprite/*.svg"
-}
+	]
+};
 
 function clean() {
 	return del("dist");
@@ -52,7 +58,7 @@ function includeHtml() {
 			})
 		)
 		.pipe(formatHtml())
-	pipe(gulp.dest("dist"));
+		.pipe(gulp.dest("dist"));
 }
 
 function style() {
@@ -140,7 +146,7 @@ function svgSprite() {
 			})
 		)
 		.pipe(rename("symbols.svg"))
-		.pipe(gulp.dest("dist/assets/icon"))
+		.pipe(gulp.dest("dist/assets/icons"));
 }
 
 const build = gulp.series(
