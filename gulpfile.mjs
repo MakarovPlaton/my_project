@@ -1,9 +1,7 @@
 import gulp from "gulp";
 import del from "del";
-
 import include from "gulp-file-include";
 import formatHtml from "gulp-format-html";
-
 import less from "gulp-less";
 import plumber from "gulp-plumber";
 import postcss from "gulp-postcss";
@@ -11,25 +9,19 @@ import autoprefixer from "autoprefixer";
 import sortMediaQueries from "postcss-sort-media-queries";
 import minify from "gulp-csso";
 import rename from "gulp-rename";
-
 import terser from "gulp-terser";
-
 import imagemin from "gulp-imagemin";
 import imagemin_gifsicle from "imagemin-gifsicle";
 import imagemin_mozjpeg from "imagemin-mozjpeg";
 import imagemin_optipng from "imagemin-optipng";
-
 import svgmin from "gulp-svgmin";
 import svgstore from "gulp-svgstore";
-
 import server from "browser-sync";
-
-
 const resources = {
 	html: "src/html/**/*.html",
 	jsDev: "src/scripts/dev/**/*.js",
 	jsVendor: "src/scripts/vendor/**/*.js",
-	images: "src/assets/images/**/*.{png. jpg. jpeg. webp, gif, svg}",
+	images: "src/assets/images/**/*.{png,jpg,jpeg,webp,gif,svg}",
 	less: "src/styles/**/*.less",
 	svgSprite: "src/assets/svg-sprite/*.svg",
 	static: [
@@ -42,11 +34,10 @@ const resources = {
 		"src/php/**/*.php"
 	]
 };
-
+// Gulp Tasks:
 function clean() {
 	return del("dist");
 }
-
 function includeHtml() {
 	return gulp
 		.src("src/html/*.html")
@@ -60,28 +51,24 @@ function includeHtml() {
 		.pipe(formatHtml())
 		.pipe(gulp.dest("dist"));
 }
-
 function style() {
 	return gulp
 		.src("src/styles/styles.less")
 		.pipe(plumber())
 		.pipe(less())
 		.pipe(
-			postcss(
-				[
-					autoprefixer({ overrideBrowserslist: ["last 4 version"] }),
-					sortMediaQueries({
-						sort: "desktop-first"
-					})
-				])
+			postcss([
+				autoprefixer({ overrideBrowserslist: ["last 4 version"] }),
+				sortMediaQueries({
+					sort: "desktop-first"
+				})
+			])
 		)
 		.pipe(gulp.dest("dist/styles"))
 		.pipe(minify())
 		.pipe(rename("styles.min.css"))
 		.pipe(gulp.dest("dist/styles"));
-
 }
-
 function js() {
 	return gulp
 		.src("src/scripts/dev/*.js")
@@ -101,22 +88,19 @@ function js() {
 		)
 		.pipe(gulp.dest("dist/scripts"));
 }
-
 function jsCopy() {
 	return gulp
 		.src(resources.jsVendor)
 		.pipe(plumber())
-		.pipe(gulp.dest("dist/scripts"))
+		.pipe(gulp.dest("dist/scripts"));
 }
-
 function copy() {
 	return gulp
 		.src(resources.static, {
-			bese: "src"
+			base: "src"
 		})
-		.pipe(gulp.dest("dist/"))
+		.pipe(gulp.dest("dist/"));
 }
-
 function images() {
 	return gulp
 		.src(resources.images)
@@ -129,7 +113,6 @@ function images() {
 		)
 		.pipe(gulp.dest("dist/assets/images"));
 }
-
 function svgSprite() {
 	return gulp
 		.src(resources.svgSprite)
@@ -148,7 +131,6 @@ function svgSprite() {
 		.pipe(rename("symbols.svg"))
 		.pipe(gulp.dest("dist/assets/icons"));
 }
-
 const build = gulp.series(
 	clean,
 	copy,
@@ -159,12 +141,10 @@ const build = gulp.series(
 	images,
 	svgSprite
 );
-
 function reloadServer(done) {
 	server.reload();
 	done();
 }
-
 function serve() {
 	server.init({
 		server: "dist"
@@ -177,9 +157,7 @@ function serve() {
 	gulp.watch(resources.images, { delay: 500 }, gulp.series(images, reloadServer));
 	gulp.watch(resources.svgSprite, gulp.series(svgSprite, reloadServer));
 }
-
 const start = gulp.series(build, serve);
-
 export {
 	clean,
 	copy,

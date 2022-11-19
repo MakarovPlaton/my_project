@@ -1,0 +1,98 @@
+.blog-card {
+	box-sizing: border-box;
+	position: relative;
+	display: flex;
+	width: 100%;
+
+	&_conteiner {
+		.conteiner;
+	}
+
+	&_link {
+		display: block;
+		flex-shrink: 0;
+		margin-right: 60px;
+		max-width: 467px;
+		width: 100%;
+	}
+
+	&_picture {
+		display: block;
+		position: relative;
+
+		&::before {
+			content: '';
+			display: block;
+			padding-top: 62.312%;
+			width: 100%;
+		}
+	}
+
+	&_img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	&_info {
+		margin-top: 30px;
+		min-width: 470px;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	&_info-time {
+		display: block;
+		margin-bottom: 70px;
+		font-weight: 300;
+		font-size: @font-size;
+		color: @black;
+	}
+
+	&_title-link {
+		margin-bottom: 40px;
+
+		&:hover,
+		&:active {
+
+			.blog-card_title,
+			.blog-card_icon {
+				color: @red_hover;
+			}
+
+			.blog-card_title {
+				text-decoration-color: @red_hover;
+			}
+		}
+	}
+
+	&_title {
+		margin: 0;
+		text-decoration: underline;
+		text-decoration-color: transparent;
+		font-weight: 700;
+		color: @black;
+		transition: color 0.2s, text-decoration-color 0.2s;
+	}
+
+	&_icon {
+		position: absolute;
+		right: 0;
+		bottom: 90;
+		display: block;
+		color: @black;
+		transition: color 0.2s;
+	}
+
+	&_text {
+		margin: 0;
+		font-family: @font1;
+		font-weight: 400;
+		font-size: @font-size;
+		line-height: 1.3;
+		color: @black
+	}
+}
